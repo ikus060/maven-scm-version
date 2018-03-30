@@ -1,0 +1,22 @@
+image: ikus060/docker-debian-py2-py3:stretch
+
+stages:
+- test
+- deploy
+
+# TODO Split this by python version and OS.
+test:py27:
+  stage: test
+  script:
+  - nosetests-2.7
+  
+test:py3: 
+  stage: test
+  script:
+  - nosetests-3.4
+  
+github_push:
+  stage: deploy
+  script:
+  - git push --force https://${GITHUB_USR}:${GITHUB_PWD}@github.com/ikus060/maven-scm-version.git refs/remotes/origin/${CI_COMMIT_REF_NAME}:refs/heads/${CI_COMMIT_REF_NAME}
+  - git push https://${GITHUB_USR}:${GITHUB_PWD}@github.com/ikus060/maven-scm-version.git --tags
