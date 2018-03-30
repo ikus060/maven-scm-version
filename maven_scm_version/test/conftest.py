@@ -70,7 +70,7 @@ class Wd(object):
     def get_version(self, **kw):
         __tracebackhide__ = True
         version_sh = pkg_resources.resource_filename('maven_scm_version', '../version.sh')  # @UndefinedVariable
-        version = subprocess.check_output(version_sh, shell=True, cwd=str(self.cwd), **kw).strip('\n')
+        version = subprocess.check_output(version_sh, shell=True, cwd=self.cwd, **kw).decode('utf-8').strip('\n')
         print(version)
         return version
 
