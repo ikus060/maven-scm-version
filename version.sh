@@ -1,6 +1,5 @@
 #!/bin/bash
-# Copyright (C) 2018, Patrik Dufresne Service Logiciel inc. All rights reserved.
-# Patrik Dufresne Service Logiciel PROPRIETARY/CONFIDENTIAL.
+# Copyright (C) 2018, Patrik Dufresne Service Logiciel inc.
 # Use is subject to license terms.
 #
 # This script return a valid maven version from git SCM. This  implementation 
