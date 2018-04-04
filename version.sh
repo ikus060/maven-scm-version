@@ -47,8 +47,8 @@ else
 	  DESCRIBE="${DESCRIBE/-dirty/}"
 	fi
 	# garbage-v3.0.6-24-g2c76283
-	NODE="${DESCRIBE##*-}"
-	DESCRIBE=${DESCRIBE%-*}
+	NODE="${DESCRIBE##*-g}"
+	DESCRIBE=${DESCRIBE%-g*}
 	# garbage-v3.0.6-24
 	DISTANCE="${DESCRIBE##*-}"
 	# garbage-v3.0.6
