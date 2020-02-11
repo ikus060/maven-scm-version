@@ -30,6 +30,10 @@ increment_version ()
   new="${part[*]}"
   echo -e "${new// /.}"
 }
+if ! type git > /dev/null; then
+    echo "git executable can't be found!"
+    exit 1
+fi
 DESCRIBE=$(git describe --dirty --tags --long --match "*.*" 2>/dev/null || true)
 if [ -z "$DESCRIBE" ]; then
 	TAG="0.0.0"
