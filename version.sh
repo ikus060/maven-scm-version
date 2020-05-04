@@ -17,18 +17,21 @@
 set -e
 increment_version ()
 {
-  declare -a part=( ${1//\./ } )
-  declare    new
-  declare -i carry=1
-
-  for (( CNTR=${#part[@]}-1; CNTR>=0; CNTR-=1 )); do
-    len=${#part[CNTR]}
-    new=$((part[CNTR]+carry))
-    [ ${#new} -gt $len ] && carry=1 || carry=0
-    [ $CNTR -gt 0 ] && part[CNTR]=${new: -len} || part[CNTR]=${new}
-  done
-  new="${part[*]}"
-  echo -e "${new// /.}"
+    declare -a part=( ${VERSION//[^0-9]/ } )
+    declare -a sep=( ${VERSION//[0-9]/ } )
+    declare -i carry=1
+    declare    new
+    for (( CNTR=${#part[@]}-1; CNTR>=0; CNTR-=1 )); do
+        len=${#part[CNTR]}
+        new=$((part[CNTR]+carry))
+        [ ${#new} -gt $len ] && carry=1 || carry=0
+        [ $CNTR -gt 0 ] && part[CNTR]=${new: -len} || part[CNTR]=${new}
+    done
+    declare final
+    for (( CNTR=0; CNTR<=${#part[@]}-1; CNTR+=1 )); do
+        final="$final${part[CNTR]}${sep[CNTR]}"
+    done
+    echo -e "$final"
 }
 if ! type git > /dev/null; then
     echo "git executable can't be found!"
