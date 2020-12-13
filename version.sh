@@ -16,7 +16,7 @@
 #
 # First arguments, define the format styled to be used.
 # * DEFAULT: {next_version}-{distance}-g{revision hash}
-# * DEB:     {next_version}~a{distance}+g{revision hash}
+# * DEB:     {next_version}~dev{distance}+g{revision hash}
 #
 
 set -e
@@ -41,7 +41,7 @@ if ! type git > /dev/null; then
 fi
 case "$1" in
 DEB|DEBIAN)
-  SEP1="~a"
+  SEP1="~dev"
   SEP2="+g"
   SEP3="+d"
   ;;
