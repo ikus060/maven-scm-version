@@ -30,7 +30,12 @@ increment_version ()
     len=${#part[CNTR]}
     new=$((part[CNTR]+carry))
     [ ${#new} -gt $len ] && carry=1 || carry=0
-    [ $CNTR -gt 0 ] && part[CNTR]=${new: -len} || part[CNTR]=${new}
+    if [ $CNTR -gt 0 ]; then
+      new="0000$new"
+      part[CNTR]=${new: -len}
+    else
+      part[CNTR]=${new}
+    fi
   done
   new="${part[*]}"
   echo -e "${new// /.}"
