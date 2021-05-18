@@ -90,6 +90,7 @@ VERSION="${VERSION%%-g*}"
 VERSION="${VERSION%%+*}"
 VERSION="${VERSION##*-}"
 VERSION="${VERSION##v}"
+VERSION="${VERSION##V}"
 NEXT_VERSION=$(increment_version "$VERSION")
 # Print version
 if [ -z "$NODE" ]; then
