@@ -55,7 +55,7 @@ class Test(unittest.TestCase):
         self.assertEqual(self.wd.version, '1.0.1')
 
         self.wd.write('test.txt', 'test2')
-        assert self.wd.version.startswith('1.0.1-d')
+        assert self.wd.version.startswith('1.0.1.d'), self.wd.version
 
         self.wd.commit_testfile()
         assert self.wd.version.startswith('1.0.2-1-g')
@@ -79,6 +79,15 @@ class Test(unittest.TestCase):
         self.wd.write('test.txt', 'test2')
         self.wd("git add test.txt")
         assert self.wd.version.startswith('0.0.1-1-g')
+
+
+    def test_with_alpha_version(self):
+        self.wd.commit_testfile()
+        self.wd('git tag 4.0.1a2')
+        assert self.wd.version == '4.0.1a2'
+        self.wd.commit_testfile()
+        assert self.wd.version.startswith('4.0.1a3')
+
 
 
 if __name__ == "__main__":

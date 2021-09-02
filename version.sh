@@ -22,23 +22,9 @@
 set -e
 increment_version ()
 {
-  declare -a part=( ${1//\./ } )
-  declare    new
-  declare -i carry=1
-
-  for (( CNTR=${#part[@]}-1; CNTR>=0; CNTR-=1 )); do
-    len=${#part[CNTR]}
-    new=$((part[CNTR]+carry))
-    [ ${#new} -gt $len ] && carry=1 || carry=0
-    if [ $CNTR -gt 0 ]; then
-      new="0000$new"
-      part[CNTR]=${new: -len}
-    else
-      part[CNTR]=${new}
-    fi
-  done
-  new="${part[*]}"
-  echo -e "${new// /.}"
+  declare    base=( ${1%%[0-9]} )
+  declare -a part=( ${1//[^0-9]/ } )
+  echo "${base}$((${part[-1]}+1))"
 }
 if ! type git > /dev/null; then
     echo "git executable can't be found!"

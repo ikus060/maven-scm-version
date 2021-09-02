@@ -4,12 +4,6 @@ stages:
 - test
 - deploy
 
-# TODO Split this by python version and OS.
-test:py27:
-  stage: test
-  script:
-  - nosetests-2.7
-  
 test:py3: 
   stage: test
   script:
